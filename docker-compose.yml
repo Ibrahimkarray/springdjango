@@ -1,0 +1,57 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+  spring:
+    image: openjdk:11-jdk-slim
+    command: java -jar /app.jar
+    volumes:
+      - ./app.jar:/app.jar
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres/mydb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: mysecretpassword
+  django:
+    image: python:3.9
+    command: python manage.py runserver 0.0.0.0:8000
+    working_dir: /code
+    volumes:
+      - ./django:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    environment:
+      DJANGO_SETTINGS_MODULE: myproject.settings
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: mydb
+    # Install any additional dependencies using pip:
+      command: sh -c "pip install -r requirements.txt && python manage.py runserver 0.0.0.0:8000"
+  flask:
+    image: python:3.9
+    command: flask run --host=0.0.0.0
+    working_dir: /code
+    volumes:
+      - ./flask:/code
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+    environment:
+      FLASK_APP: myapp
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: mydb
+    # Install any additional dependencies using pip:
+      command: sh -c "pip install -r requirements.txt && flask run --host=0.0.0.0"
