@@ -40,18 +40,15 @@ services:
       command: sh -c "pip install -r requirements.txt && python manage.py runserver 0.0.0.0:8000"
   flask:
     image: python:3.9
-    command: flask run --host=0.0.0.0
-    working_dir: /code
+    command: python app.py
+    working_dir: /app
     volumes:
-      - ./flask:/code
+      - ./flask:/app
     ports:
       - "5000:5000"
     depends_on:
       - postgres
     environment:
-      FLASK_APP: myapp
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: mysecretpassword
-      POSTGRES_DB: mydb
+      DATABASE_URL: postgresql://postgres:mysecretpassword@postgres/mydb
     # Install any additional dependencies using pip:
       command: sh -c "pip install -r requirements.txt && flask run --host=0.0.0.0"
