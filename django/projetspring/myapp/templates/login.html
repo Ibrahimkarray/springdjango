@@ -1,0 +1,65 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://bootswatch.com/5/superhero/bootstrap.min.css" >
+    <LINK REL=StyleSheet HREF="static/main.css" TYPE="text/css" MEDIA=screen>
+    <title>Title</title>
+
+</head>
+<body>
+<style>
+
+    body{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+.bgimg{
+ background:url(https://www.bootstrapdash.com/demo/star-admin-free/jquery/src/assets/images/auth/login_1.jpg);
+  background-size:cover;
+}
+</style>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<div class="vh-100 gradient-custom bgimg">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+
+                        <div class="mb-md-5 mt-md-4 pb-5">
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label class="form-label" for="exampleInputEmail1">Username</label>
+                                    <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail1"
+                                           name="username" >
+                                    <div class="form-text" id="emailHelp">We'll never share your email with anyone
+                                        else.
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="exampleInputPassword1">Password</label>
+                                    <input class="form-control" id="exampleInputPassword1" name="password"
+                                           type="password">
+                                </div>
+
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                                    <br>
+                                    <br>
+                                <a href="http://127.0.0.1:8000/signup"><p>Sign Up Here !   </p></a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>

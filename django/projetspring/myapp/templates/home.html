@@ -1,0 +1,147 @@
+{% extends 'layouts/default.html'%}
+{% block body %}
+{% load crispy_forms_tags %}
+<br>
+<br>
+<style>
+/* Style the form container */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Style the form labels */
+label {
+  margin-right: 35px;
+  font-weight: bold;
+}
+
+/* Style the form inputs */
+input[type="radio"] {
+  margin-right: 5px;
+}
+
+/* Style the form submit button */
+button[type="submit"] {
+  display: block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+/* Style the form inputs with different colors */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus {
+  border-color: #4CAF50;
+}
+
+/* Style the radio button labels */
+.radio-label {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Style the radio buttons */
+.radio-label input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On radio button hover, add background color */
+.radio-label:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* On radio button selected, add background color */
+.radio-label input:checked ~ .checkmark {
+  background-color: #4CAF50;
+}
+.formg {
+  background-color: #eaf2f8;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #bdc9d7;
+  width:90%;
+  display:flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Style the submit button with different colors */
+.btn-primary {
+  background-color: #4CAF50;
+  border-color: #4CAF50;
+}
+
+.btn-primary:hover {
+  background-color: #3e8e41;
+  border-color: #3e8e41;
+}
+
+/* Style the error messages with different colors */
+.help-block {
+  color: #ff0000;
+  margin-top: 5px;
+}
+
+</style>
+
+<div class="formg">
+    <br>
+  <div class="row">
+
+
+      <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+      </form>
+      </div>
+    </div>
+  </div>
+    <br>
+    <br>
+</div>
+{%endblock%}

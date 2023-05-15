@@ -1,0 +1,113 @@
+{% extends 'layouts/default.html'%}
+{% block body %}
+<style>
+body{
+  background:url(https://www.bootstrapdash.com/demo/star-admin-free/jquery/src/assets/images/auth/login_1.jpg);
+  color :gold ;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+input, select, textarea{
+background-color: #4B0005;
+    color:gold;
+   border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 9px 15px;
+}
+.formg{
+background-color:#4B0005;
+width:80%;
+margin:auto;
+border: 2px solid #4B0005;
+  border-radius: 25px;
+   display: block;
+    text-align: center;
+  }
+a{
+color:black;
+
+}
+#i{
+margin-left: 90%;
+width: 45px;
+
+}
+#c{
+margin-left: 90%;
+width: 45px;
+
+}
+#b{
+margin-left: 90%;
+width: 45px;
+
+}
+.recherche{
+text-align: center;
+}
+
+ form {
+     display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+tr{
+color:gold;
+}
+
+
+h3{
+display: block;
+    text-align: center;
+}
+.container{
+display: flex;
+margin-left: 85%;
+}
+
+</style>
+
+<h3>Votre maladie est {{maladie}}</h3>
+<br>
+<br>
+<h3>. . . . . . Liste des Utilisations . . . . . . </h3>
+
+
+
+<br>
+
+<div class="formg">
+    <table class="table table-hover" >
+    <tr>
+        <th scope="col">Date de consultation</th>
+        <th scope="col">Resultat</th>
+
+        <th></th>
+    </tr>
+        {% for  article  in tableau %}
+        <div>
+
+
+    <tr class="table-secondary">
+        <td>{{article.createdDate}}</td>
+        <td>{{article.result}}</td>
+
+
+
+
+    </tr>
+
+   <!-- <tr>
+        <td colspan="3">Prix Totale</td>
+        <td>{{value11}}</td>
+    </tr> -->
+
+
+        </div>
+    {% endfor %}
+    </table>
+</div>
+{%endblock%}
