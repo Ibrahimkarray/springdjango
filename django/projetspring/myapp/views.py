@@ -9,6 +9,18 @@ import requests
 # Create your views here.
 from myapp.forms import signupform, SymptomsForm
 
+def get_wikipedia_summary(article_title):
+    base_url = 'https://fr.wikipedia.org/api/rest_v1/page/summary/'
+    url = base_url + article_title
+
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        summary = data['extract']
+        return summary
+    else:
+        return None
+
 
 
 def val():
@@ -55,14 +67,17 @@ def signup(request):
             form_data = form.cleaned_data
             # convert the dictionary to JSON:
 
+
             print(form_data)
             print(type(form_data))
+            form_data["role"]="USER"
             x = requests.post('http://127.0.0.1:8080/api/users/createUser', json=form_data)
             print(x.status_code)
             print(x.text)
 
             # return a JSON response:
             #return JsonResponse({'data': json_data})
+            return redirect('login')
     context = {'form': form}
     return render(request, 'signup.html',context )
 
@@ -89,13 +104,16 @@ def home(request):
             illness=result['result']
             print(illness)
             jayson={"user_id":str(a),"result":illness,"createdDate":str(date.today())}
-            # x = requests.post('http://127.0.0.1:8080/userHistories', json=jayson)
+            x = requests.post('http://127.0.0.1:8080/userHistories', json=jayson)
             # print(x.status_code)
             # print(x.text)
             y=requests.get("http://127.0.0.1:8080/userHistories")
             result = y.json()["_embedded"]["userHistories"]
             print("result",result)
-            context={'maladie':illness,"tableau":result}
+            article_title = illness
+            summary = get_wikipedia_summary(article_title)
+
+            context={'maladie':illness,"tableau":result,"summary":summary}
             return render(request, 'home2.html',context)
 
 

@@ -1,113 +1,86 @@
 {% extends 'layouts/default.html'%}
 {% block body %}
-<style>
-body{
-  background:url(https://www.bootstrapdash.com/demo/star-admin-free/jquery/src/assets/images/auth/login_1.jpg);
-  color :gold ;
-   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Styles for the disconnect button */
+        .disconnect-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
 
-}
-input, select, textarea{
-background-color: #4B0005;
-    color:gold;
-   border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  padding: 9px 15px;
-}
-.formg{
-background-color:#4B0005;
-width:80%;
-margin:auto;
-border: 2px solid #4B0005;
-  border-radius: 25px;
-   display: block;
-    text-align: center;
-  }
-a{
-color:black;
+        /* Styles for the disease section */
+        .disease-section h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
 
-}
-#i{
-margin-left: 90%;
-width: 45px;
+        .disease-section h4 {
+            font-size: 16px;
+        }
 
-}
-#c{
-margin-left: 90%;
-width: 45px;
+        /* Styles for the list of uses */
+        .use-list-section h3 {
+            font-size: 20px;
+            margin-top: 40px;
+        }
 
-}
-#b{
-margin-left: 90%;
-width: 45px;
+        /* Styles for the table */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
 
-}
-.recherche{
-text-align: center;
-}
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
 
- form {
-     display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
+        .table th {
+            background-color: #f2f2f2;
+        }
 
-tr{
-color:gold;
-}
-
-
-h3{
-display: block;
-    text-align: center;
-}
-.container{
-display: flex;
-margin-left: 85%;
-}
-
-</style>
-
-<h3>Votre maladie est {{maladie}}</h3>
-<br>
-<br>
-<h3>. . . . . . Liste des Utilisations . . . . . . </h3>
-
-
-
-<br>
-
-<div class="formg">
-    <table class="table table-hover" >
-    <tr>
-        <th scope="col">Date de consultation</th>
-        <th scope="col">Resultat</th>
-
-        <th></th>
-    </tr>
-        {% for  article  in tableau %}
-        <div>
-
-
-    <tr class="table-secondary">
-        <td>{{article.createdDate}}</td>
-        <td>{{article.result}}</td>
-
-
-
-
-    </tr>
-
-   <!-- <tr>
-        <td colspan="3">Prix Totale</td>
-        <td>{{value11}}</td>
-    </tr> -->
-
-
+        .table tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'login'  %}">
+        <button class="disconnect-button">Disconnect</button>
+    </a>
+    <div class="disease-section">
+        <h3>Votre maladie est {{maladie}}:</h3>
+        <h4>{{summary}}</h4>
+    </div>
+    <div class="use-list-section">
+        <h3>. . . . . . Liste des Utilisations . . . . . . </h3>
+        <br>
+        <div class="formg">
+            <table class="table table-hover">
+                <tr>
+                    <th>Date de consultation</th>
+                    <th>Resultat</th>
+                </tr>
+                {% for  article  in tableau %}
+                <tr class="table-secondary">
+                    <td>{{article.createdDate}}</td>
+                    <td>{{article.result}}</td>
+                </tr>
+                {% endfor %}
+            </table>
         </div>
-    {% endfor %}
-    </table>
-</div>
+    </div>
+</body>
+</html>
 {%endblock%}
