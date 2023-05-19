@@ -1,0 +1,10 @@
+FROM postgres:latest
+
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD="*****"
+ENV POSTGRES_DB=mydb
+
+COPY init.sql /docker-entrypoint-init-db.d/
+
+EXPOSE 5432
+CMD["postgres"]
